@@ -1,14 +1,18 @@
 import streamlit as st
 import pickle
 
-# --- Load Data ---
+#Load Data
 movies = pickle.load(open('movies.pkl', 'rb'))
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+movies = pd.DataFrame(movies)
 
-# --- Page Configuration ---
+tfidf = TfidfVectorizer(stop_words='english')
+tfidf_matrix = tfidf.fit_transform(movies['overview'])
+similarity = cosine_similarity(tfidf_matrix)
+
+#Page Configuration
 st.set_page_config(page_title="🎬 Movie Recommender System", layout="wide")
 
-# --- Custom Styling ---
+#Custom Styling
 st.markdown("""
 <style>
 .stApp {
