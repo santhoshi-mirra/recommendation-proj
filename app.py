@@ -1,5 +1,8 @@
 import streamlit as st
 import pickle
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 #Load Data
 movies = pickle.load(open('movies.pkl', 'rb'))
